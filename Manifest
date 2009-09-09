@@ -1,0 +1,15 @@
+Manifest
+README.rdoc
+Rakefile
+lib/hostel.rb
+lib/hostel/gomio.rb
+lib/hostel/hostel.rb
+lib/hostel/hostel_available.rb
+lib/hostel/hostelbookers.rb
+lib/hostel/hostelworld.rb
+lib/test.rb
+spec/_helper.rb
+spec/hb_find_by_hostel.spec
+spec/hb_find_hostels.spec
+spec/hw_find_by_hostel.spec
+spec/hw_find_hostels.spec

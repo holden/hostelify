@@ -1,16 +1,11 @@
 class Hostel
-  attr_accessor :hostel_id, :name, :address, :description, :facilities, :ratings, :directions, :geo, :images, :video, :availability
-  
-  def facilities
-     self.instance_variable_get(:@facilities) || []
-  end
+  attr_accessor :hostel_id, :name, :address, :description, :facilities, :ratings, :directions, :geo, :images, :video, :availability, :price
 
-  #def ratings
-  #   self.instance_variable_get(:@ratings) || []
-  #end
-
-  #def photos
-  #  self.instance_variable_get(:@photos) || []
-  #end
+  def initialize(options = {})
+      options.each {
+        |k,v|
+        self.send( "#{k.to_s}=".intern, v)
+      }
+    end
 
 end

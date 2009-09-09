@@ -1,7 +1,4 @@
-$LOAD_PATH.unshift(File.dirname(__FILE__))
-$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
-
-require 'hostel'
+require 'spec/_helper'
 
 describe "find hostel by id, no options" do
   
@@ -68,19 +65,19 @@ describe "with dates to get availabilty and verify output!" do
   end
   
   it "get first availability and check it merit" do
-    @h.availability.first[:name] =~ /bed/
+    @h.availability.first.name =~ /bed/
   end
   
   it "check number of avail beds" do
-    @h.availability.first[:spots].to_i.should be >= 1
+    @h.availability.first.spots.to_i.should be >= 1
   end
   
   it "last avail has a price > 5 US" do
-    @h.availability.last[:price].to_i.should be > 5
+    @h.availability.first.price.to_i.should be > 5
   end
   
   it "book date eq today + 10" do
-    @h.availability.last[:bookdate].should_not be nil
+    @h.availability.last.bookdate.should_not be nil
   end
   
 

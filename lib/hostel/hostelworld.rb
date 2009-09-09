@@ -116,8 +116,8 @@ class Hostelworld
       type = row.at("div.hostelListingImage/span").inner_text
       hostel_id = url.match(/[\d]*$/).to_s
       
-      @main_values = { :hostel_id => hostel_id, :name => name, :desc => desc, :type => type, :rating => rating }
-      @extra = {}
+      #@main_values = { :hostel_id => hostel_id, :name => name, :desc => desc, :type => type, :rating => rating }
+      #@extra = {}
       
       if options[:date]
         #price_USD = row.at("span.blueBeds").inner_text #need to fix float
@@ -126,9 +126,12 @@ class Hostelworld
         available = row/"ul.hostelListingDates/li.noAvail/text()"
         available = available.to_a.join(',').split(',')
         #available2 = row/"ul.hostelListingDates"/"text()"
-        @extra = { :dorm => dorm, :single => single, :unavailable => available }
+        #@extra = { :dorm => dorm, :single => single, :unavailable => available }
+        @results << Hostel.new(:hostel_id => hostel_id, :name => name, :description => desc, :ratings => rating, :price => dorm, :availability => available)
+      else
+        @results << Hostel.new(:hostel_id => hostel_id, :name => name, :description => desc, :ratings => rating)
       end
-      @results << @main_values.merge(@extra)
+      #@results << @main_values.merge(@extra)
     end
     return @results
   end
@@ -185,9 +188,9 @@ class Hostelworld
 
             if available
               beds = available.to_s.match(/[\d]{1,2}/)[0]
-              availables << { :name => name, :price => price, :spots => beds, :bookdate => date }
+              availables << HostelAvailable.new(name,price,beds,date)
             else
-              availables << { :name => name, :price => 0, :spots => 0, :bookdate => date }
+              availables << HostelAvailable.new(name,price,0,date)
             end
           end
         end

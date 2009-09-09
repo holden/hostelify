@@ -18,11 +18,14 @@ class Hostelbookers
       date = Date.strptime(options[:date])
       data = setSearch(url,options[:date],options[:no_days])
     else
-      data = Hpricot(open(url))
+      Retryable.try 3 do
+        data = Hpricot(open(url))
+      end
     end
     
     data = data.search("//div[@id='propertyResultsList']")
-    @results = []
+    #@results = []
+    @results = HostelCollection.new
       #coder = HTMLEntities.new
     (data/"tr.propertyRow").each do |row|
       name = row.at("a.propertyTitle").inner_text
@@ -34,7 +37,8 @@ class Hostelbookers
       single = row.at("td.private/text()")
       hb_id = url.match(/[\d]{2,5}.$/).to_s.to_i
       
-      @results << Hostel.new(:hostel_id => hb_id, :name => name, :description => desc, :ratings => rating, :price => dorm)
+      #@results << Hostel.new(:hostel_id => hb_id, :name => name, :description => desc, :rating => rating, :dorm => dorm, :single => single)
+      @results << Hostel.new(:hostel_id => hb_id, :name => name, :description => desc, :rating => rating, :dorm => dorm, :single => single)
     end    
     return @results
   end
@@ -51,7 +55,9 @@ class Hostelbookers
       options = @default_options.merge(options)
       data = setSearch_id(url,options[:date],options[:no_days])
     else
-      data = Hpricot(open(url))
+      Retryable.try 3 do
+        data = Hpricot(open(url))
+      end
     end
     
     hostel.hostel_id = id
@@ -119,7 +125,7 @@ class Hostelbookers
       hostel.availability = @availables
     end
     
-    hostel
+    return hostel
   end
   
   def self.setSearch(url,date,no_days)
@@ -129,12 +135,18 @@ class Hostelbookers
       form = page.form_with(:name => 'searchForm') # => WWW::Mechanize::Form
       form.field_with(:name => 'intnights').options[no_days.to_i-1].select
       form.dtearrival = date #d/m/y
-      page = agent.submit(form)
+      
+      Retryable.try 3 do
+        page = agent.submit(form)
+      end
       
       #to dollars!
       form = page.forms[0]
       form.field_with(:name => 'strSelectedCurrencyCode').options[5].select
-      page = agent.submit(form)
+      
+      Retryable.try 3 do
+        page = agent.submit(form)
+      end
       
       data = page.search('//div[@id="content"]')
 
@@ -148,14 +160,18 @@ class Hostelbookers
         form = page.form_with(:name => 'frmCheckAvailBook') # => WWW::Mechanize::Form
         form.field_with(:name => 'intNights').options[no_days.to_i-1].select
         form.dteArrival = date #d/m/y
-        page = agent.submit(form)
         
+        Retryable.try 3 do
+          page = agent.submit(form)
+        end
         #change currency to dollars
         form = page.forms[1]
         #puts form.name
         form.field_with(:name => 'strSelectedCurrencyCode').options[5].select
-        page = agent.submit(form)
         
+        Retryable.try 3 do
+          page = agent.submit(form)
+        end
         data = page.search('//div[@id="content"]')
 
         return data

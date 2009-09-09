@@ -16,11 +16,11 @@ describe "finds list of hostels" do
   
   
   it "rating should be high for first choices" do
-    @h.first.ratings.to_i.should be > 50 
+    @h.first.rating.to_i.should be > 50 
   end
   
   it "desc should have a certain length <" do
-    @h.first.description.length.should be > 100 
+    @h.first.description.length.should be > 80
   end
   
   it "has a hostel number" do
@@ -36,7 +36,7 @@ describe "find hostels with dates" do
   end
   
   it "rating should be high for first choices" do
-    @h.first.ratings.to_i.should be > 50 
+    @h.first.rating.to_i.should be > 50 
   end
   
   it "desc should have a certain length <" do
@@ -48,15 +48,15 @@ describe "find hostels with dates" do
   end
   
   it "has dorm rooms for greater than $5" do
-    @h.first.price.to_i.should be > 5
+    @h.first.dorm.to_i.should be > 5
   end
   
   it "has available rooms!" do
-    @h.first.availability.first.should be nil
+    @h.first.unavailable.first.should be nil
   end
   
   it "has unavailable rooms!" do
-    @h.last.availability.first.should_not be nil
+    @h.last.unavailable.first.should_not be nil
   end
   
 end

@@ -14,7 +14,9 @@ class Hostelworld
   def self.parse_html(url)
     f = open(url)
     f.rewind
-    data = Hpricot(Iconv.conv('utf-8', f.charset, f.readlines.join("\n")))
+    Retryable.try 3 do
+      data = Hpricot(Iconv.conv('utf-8', f.charset, f.readlines.join("\n")))
+    end
   end
   
   def self.find_hostel_by_id(options)
@@ -105,7 +107,8 @@ class Hostelworld
     end
     
     data = data.search("//div[@id='content']")
-    @results = []
+    #@results = []
+    @results = HostelCollection.new
 
     (data/"div.hostelListing").each do |row|
       name = row.at("h3").inner_text
@@ -127,9 +130,9 @@ class Hostelworld
         available = available.to_a.join(',').split(',')
         #available2 = row/"ul.hostelListingDates"/"text()"
         #@extra = { :dorm => dorm, :single => single, :unavailable => available }
-        @results << Hostel.new(:hostel_id => hostel_id, :name => name, :description => desc, :ratings => rating, :price => dorm, :availability => available)
+        @results << Hostel.new(:hostel_id => hostel_id, :name => name, :description => desc, :rating => rating, :dorm => dorm, :single => single, :unavailable => available)
       else
-        @results << Hostel.new(:hostel_id => hostel_id, :name => name, :description => desc, :ratings => rating)
+        @results << Hostel.new(:hostel_id => hostel_id, :name => name, :description => desc, :rating => rating)
       end
       #@results << @main_values.merge(@extra)
     end
@@ -150,8 +153,11 @@ class Hostelworld
 
       #the form name
       form = page.forms.first # => WWW::Mechanize::Form
-      page = agent.submit(form)
-
+      
+      Retryable.try 3 do
+        page = agent.submit(form)
+      end
+      
       #form must be submitted twice because the people writing hostelworld are retards
       form = page.forms.first # => WWW::Mechanize::Form
       form.field_with(:name => 'selMonth').options[month-1].select
@@ -161,7 +167,10 @@ class Hostelworld
       form.field_with(:name => 'Persons').options[no_ppl.to_i-1].select
       form.field_with(:name => 'Currency').options[4].select #US Currency
 
-      page = agent.submit(form)
+      Retryable.try 3 do
+        page = agent.submit(form)
+      end
+      
       data = page.search("//div[@id='content']")
 
       return data

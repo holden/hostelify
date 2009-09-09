@@ -16,7 +16,7 @@ describe "test hostelbookers hostel listings" do
   end
   
   it "rating should be high for first choices" do
-    @h.first.ratings.to_i.should be > 50 
+    @h.first.rating.to_i.should be > 50 
   end
   
   it "desc should have a certain length <" do

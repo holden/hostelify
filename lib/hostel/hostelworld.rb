@@ -107,7 +107,6 @@ class Hostelworld
     end
     
     data = data.search("//div[@id='content']")
-    #@results = []
     @results = HostelCollection.new
 
     (data/"div.hostelListing").each do |row|
@@ -119,22 +118,16 @@ class Hostelworld
       type = row.at("div.hostelListingImage/span").inner_text
       hostel_id = url.match(/[\d]*$/).to_s
       
-      #@main_values = { :hostel_id => hostel_id, :name => name, :desc => desc, :type => type, :rating => rating }
-      #@extra = {}
-      
       if options[:date]
         #price_USD = row.at("span.blueBeds").inner_text #need to fix float
         dorm = (row.at("p.hostelListingRate/span.blueBeds/text()")).to_s.gsub(/[A-Z$]*/,'')
         single = row.at("p.hostelListingPrivateRate/span.blueBeds/text()").to_s.gsub(/[A-Z$]*/,'')
         available = row/"ul.hostelListingDates/li.noAvail/text()"
         available = available.to_a.join(',').split(',')
-        #available2 = row/"ul.hostelListingDates"/"text()"
-        #@extra = { :dorm => dorm, :single => single, :unavailable => available }
         @results << Hostel.new(:hostel_id => hostel_id, :name => name, :description => desc, :rating => rating, :dorm => dorm, :single => single, :unavailable => available)
       else
         @results << Hostel.new(:hostel_id => hostel_id, :name => name, :description => desc, :rating => rating)
       end
-      #@results << @main_values.merge(@extra)
     end
     return @results
   end

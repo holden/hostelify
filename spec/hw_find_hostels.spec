@@ -3,7 +3,7 @@ require 'spec/_helper'
 describe "finds list of hostels" do
   
   before(:all) do
-    @h = Hostelworld.find_hostels_by_location(:location => 'krakow,poland')
+    @h = Hostelworldmonkey.find_hostels_by_location(:location => 'krakow,poland')
   end
   
   it "should get a list with name and brief desc" do
@@ -32,7 +32,7 @@ end
 describe "find hostels with dates" do
   
   before(:all) do
-    @h = Hostelworld.find_hostels_by_location(:location => 'krakow,poland', :date => (Date.today + 10).to_s)
+    @h = Hostelworldmonkey.find_hostels_by_location(:location => 'krakow,poland', :date => (Date.today + 10).to_s)
   end
   
   it "rating should be high for first choices" do

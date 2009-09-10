@@ -25,7 +25,7 @@ class Hostelbookers
     
     data = data.search("//div[@id='propertyResultsList']")
     #@results = []
-    @results = HostelCollection.new
+    @results = HostelifyCollection.new
       #coder = HTMLEntities.new
     (data/"tr.propertyRow").each do |row|
       name = row.at("a.propertyTitle").inner_text
@@ -37,8 +37,8 @@ class Hostelbookers
       single = row.at("td.private/text()")
       hb_id = url.match(/[\d]{2,5}.$/).to_s.to_i
       
-      #@results << Hostel.new(:hostel_id => hb_id, :name => name, :description => desc, :rating => rating, :dorm => dorm, :single => single)
-      @results << Hostel.new(:hostel_id => hb_id, :name => name, :description => desc, :rating => rating, :dorm => dorm, :single => single)
+      #@results << Hostelify.new(:hostel_id => hb_id, :name => name, :description => desc, :rating => rating, :dorm => dorm, :single => single)
+      @results << Hostelify.new(:hostel_id => hb_id, :name => name, :description => desc, :rating => rating, :dorm => dorm, :single => single)
     end    
     return @results
   end
@@ -49,7 +49,7 @@ class Hostelbookers
     id = options[:id]
     url = HB_SINGULAR_DETAIL_URL + "#{country}/#{city}/#{id}"
     
-    hostel = Hostel.new
+    hostel = Hostelify.new
 
     if options[:date]
       options = @default_options.merge(options)
@@ -118,7 +118,7 @@ class Hostelbookers
           price = price.inner_text.to_s.match(/[\d.]{1,5}/)[0] unless price.nil?
           (0..(options[:no_days].to_i-1)).each do |x|
             #@availables << { :name => name, :spots => people, :price => price, :bookdate => (date+x).to_s } unless price.nil?
-            @availables << HostelAvailable.new(name,price,people,(date+x).to_s) unless price.nil?
+            @availables << HostelifyAvailable.new(name,price,people,(date+x).to_s) unless price.nil?
           end
         end
       end

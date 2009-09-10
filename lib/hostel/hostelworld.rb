@@ -25,7 +25,7 @@ class Hostelworld
     url = HW_SINGULAR_DETAIL_URL + id
     
     #coder = HTMLEntities.new
-    hostel = Hostel.new
+    hostel = Hostelify.new
     hostel.hostel_id = id
     
     if options[:date]
@@ -107,7 +107,7 @@ class Hostelworld
     end
     
     data = data.search("//div[@id='content']")
-    @results = HostelCollection.new
+    @results = HostelifyCollection.new
 
     (data/"div.hostelListing").each do |row|
       name = row.at("h3").inner_text
@@ -124,9 +124,9 @@ class Hostelworld
         single = row.at("p.hostelListingPrivateRate/span.blueBeds/text()").to_s.gsub(/[A-Z$]*/,'')
         available = row/"ul.hostelListingDates/li.noAvail/text()"
         available = available.to_a.join(',').split(',')
-        @results << Hostel.new(:hostel_id => hostel_id, :name => name, :description => desc, :rating => rating, :dorm => dorm, :single => single, :unavailable => available)
+        @results << Hostelify.new(:hostel_id => hostel_id, :name => name, :description => desc, :rating => rating, :dorm => dorm, :single => single, :unavailable => available)
       else
-        @results << Hostel.new(:hostel_id => hostel_id, :name => name, :description => desc, :rating => rating)
+        @results << Hostelify.new(:hostel_id => hostel_id, :name => name, :description => desc, :rating => rating)
       end
     end
     return @results
@@ -190,9 +190,9 @@ class Hostelworld
 
             if available
               beds = available.to_s.match(/[\d]{1,2}/)[0]
-              availables << HostelAvailable.new(name,price,beds,date)
+              availables << HostelifyAvailable.new(name,price,beds,date)
             else
-              availables << HostelAvailable.new(name,price,0,date)
+              availables << HostelifyAvailable.new(name,price,0,date)
             end
           end
         end

@@ -1,4 +1,4 @@
-class Hostel
+class Hostelify
   attr_accessor :hostel_id, :name, :address, :description, :facilities, :ratings, :directions, :geo, :images, :video, :availability
   attr_accessor :rating, :dorm, :single, :unavailable
 
@@ -11,7 +11,7 @@ class Hostel
 
 end
 
-class HostelCollection < Array
+class HostelifyCollection < Array
   # This collection does everything an Array does, plus
   # you can add utility methods like names.
 
@@ -35,7 +35,7 @@ class HostelCollection < Array
   
 end
 
-class HostelAvailable
+class HostelifyAvailable
   attr_accessor :name, :price, :spots, :bookdate
   
   def initialize(name, price, spots, bookdate)

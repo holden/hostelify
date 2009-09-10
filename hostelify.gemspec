@@ -2,15 +2,15 @@
 
 Gem::Specification.new do |s|
   s.name = %q{hostelify}
-  s.version = "0.2.2"
+  s.version = "0.2.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 1.2") if s.respond_to? :required_rubygems_version=
   s.authors = ["Holden Thomas"]
   s.date = %q{2009-09-10}
   s.description = %q{Simple Hostel Webscrapper.}
   s.email = %q{holden.thomas@gmail.com}
-  s.extra_rdoc_files = ["README.rdoc", "lib/hostel.rb", "lib/hostel/gomio.rb", "lib/hostel/hostel.rb", "lib/hostel/hostelbookers.rb", "lib/hostel/hostelworld.rb", "lib/test.rb"]
-  s.files = ["Manifest", "README.rdoc", "Rakefile", "hostelify.gemspec", "lib/hostel.rb", "lib/hostel/gomio.rb", "lib/hostel/hostel.rb", "lib/hostel/hostelbookers.rb", "lib/hostel/hostelworld.rb", "lib/test.rb", "spec/_helper.rb", "spec/hb_find_by_hostel.spec", "spec/hb_find_hostels.spec", "spec/hw_find_by_hostel.spec", "spec/hw_find_hostels.spec"]
+  s.extra_rdoc_files = ["README.rdoc", "lib/hostelify.rb", "lib/hostelify/gomio.rb", "lib/hostelify/hostel.rb", "lib/hostelify/hostelbookers.rb", "lib/hostelify/hostelworld.rb"]
+  s.files = ["Manifest", "README.rdoc", "Rakefile", "hostelify.gemspec", "lib/hostelify.rb", "lib/hostelify/gomio.rb", "lib/hostelify/hostel.rb", "lib/hostelify/hostelbookers.rb", "lib/hostelify/hostelworld.rb", "spec/_helper.rb", "spec/hb_find_by_hostel.spec", "spec/hb_find_hostels.spec", "spec/hw_find_by_hostel.spec", "spec/hw_find_hostels.spec"]
   s.has_rdoc = true
   s.homepage = %q{http://github.com/holden/hostelify}
   s.rdoc_options = ["--line-numbers", "--inline-source", "--title", "Hostelify", "--main", "README.rdoc"]

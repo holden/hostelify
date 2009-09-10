@@ -3,8 +3,8 @@ require 'spec/_helper'
 describe "find hostel by id, no options" do
   
   before(:all) do
-    @h = Hostelworldmonkey.find_hostel_by_id(:id => 7113)
-    @h = Hostelworldmonkey.find_hostel_by_id(:id => 20763)
+    @h = Hostelworld.find_hostel_by_id(:id => 7113)
+    @h = Hostelworld.find_hostel_by_id(:id => 20763)
   end
     
   it "should query hostelworld and return the correct name" do
@@ -32,7 +32,7 @@ end
 describe "youtube" do
   
   before(:all) do
-    @h3 = Hostelworldmonkey.find_hostel_by_id(:id => 7113)
+    @h3 = Hostelworld.find_hostel_by_id(:id => 7113)
   end
   
   it "video" do
@@ -42,8 +42,8 @@ end
 
 describe "find hostel with all options" do
   before(:all) do
-	  @h2 = Hostelworldmonkey.find_hostel_by_id(:id => 7113, :all => true)
-	  @h2 = Hostelworldmonkey.find_hostel_by_id(:id => 20763, :all => true)
+	  @h2 = Hostelworld.find_hostel_by_id(:id => 7113, :all => true)
+	  @h2 = Hostelworld.find_hostel_by_id(:id => 20763, :all => true)
 	end
 	
 	it "geo" do
@@ -61,7 +61,7 @@ end
 
 describe "with dates to get availabilty and verify output!" do
   before(:all) do
-    @h = Hostelworldmonkey.find_hostel_by_id(:id => 20763, :date => (Date.today+20).to_s)
+    @h = Hostelworld.find_hostel_by_id(:id => 20763, :date => (Date.today+20).to_s)
   end
   
   it "get first availability and check it merit" do

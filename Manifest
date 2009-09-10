@@ -6,7 +6,7 @@ lib/hostelify.rb
 lib/hostelify/gomio.rb
 lib/hostelify/hostelbookers.rb
 lib/hostelify/hostelify.rb
-lib/hostelify/hostelworldmonkey.rb
+lib/hostelify/hostelworld.rb
 spec/_helper.rb
 spec/hb_find_by_hostel.spec
 spec/hb_find_hostels.spec

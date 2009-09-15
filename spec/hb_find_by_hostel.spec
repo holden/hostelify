@@ -13,7 +13,7 @@ describe "should find individual hostel and get object with name etc." do
   
   it "address" do
 	  @h.address.should match(/^.*(Krakow|Lviv).*$/)
-	end
+	end 
 	
 	it "description" do
 	  @h.address.should_not be nil

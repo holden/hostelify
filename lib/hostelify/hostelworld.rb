@@ -36,58 +36,62 @@ class Hostelworld
       data = parse_html(url)
     end
     
-    data = data.search("//div[@id='content']")
-    data.search("h3").remove #get rid of header
+    unless data == "Full" 
+      data = data.search("//div[@id='content']")
+      data.search("h3").remove #get rid of header
     
-    #title, address, desc, facilities, ratings
-    hostel.name = data.at("h2").inner_text.gsub(/( in  ).*$/,'')
-    hostel.address = data.at('div[@style="padding-top: 5px"]').inner_text.lstrip
+      #title, address, desc, facilities, ratings
+      hostel.name = data.at("h2").inner_text.gsub(/( in  ).*$/,'')
+      hostel.address = data.at('div[@style="padding-top: 5px"]').inner_text.lstrip
     
-    if options[:date]
-      hostel.availability = parse_availables(data)
-    else
-      hostel.description = data.at('div[@id="microDescription2]').inner_text
-    end
-    
-    #optional
-    no_photos = data.at('span/a[@id="picLink"]').inner_text.to_i
-    video = data.at('div[@id="microVideo"]')
-    
-    facilities = []
-    (data/"li.microFacilitiesBoomLi").each do |item|
-      facilities << item.inner_text
-    end
-    
-    ratings = []
-    (data/'div[@id="ratingsBar2"]').each do |item|
-      ratings << item.inner_text.to_i
-    end
-    
-    hostel.facilities = facilities
-    hostel.ratings = ratings
-    
-    if video #exists
-      data = parse_html(HW_SINGULAR_YOUTUBE_URL + id)
-      video_url = data.at('param[@name="movie"]')['value']
-      hostel.video = video_url
-      #video_url = data.at('tag')
-    end
-    
-    if options[:directions] or options[:all]
-      data = parse_html(HW_SINGULAR_DETAIL_URL + id + "/directions/")
-    
-      #directions, geo
-      hostel.directions = data.at('div[@id="content"]').inner_text.gsub(/^[\d\D\n]*(DIRECTIONS)/,'')
-      hostel.geo = data.to_s.scan(/-{0,1}\d{1,3}\.\d{7}/).uniq!
-    end
-
-    if no_photos and (options[:images] or options[:all])
-      images = []
-      (1..no_photos).each do |i|
-        data = parse_html(HW_SINGULAR_IMAGE_URL + id + '&PicNO=' + i.to_s)
-        images << (data/"img").first[:src].to_s
+      if options[:date]
+        hostel.availability = parse_availables(data)
+      else
+        hostel.description = data.at('div[@id="microDescription2]').inner_text
       end
-      hostel.images = images
+    
+      #optional
+      no_photos = data.at('span/a[@id="picLink"]').inner_text.to_i
+      video = data.at('div[@id="microVideo"]')
+    
+      facilities = []
+      (data/"li.microFacilitiesBoomLi").each do |item|
+        facilities << item.inner_text
+      end
+    
+      ratings = []
+      (data/'div[@id="ratingsBar2"]').each do |item|
+        ratings << item.inner_text.to_i
+      end
+    
+      hostel.facilities = facilities
+      hostel.ratings = ratings
+    
+      if video #exists
+        data = parse_html(HW_SINGULAR_YOUTUBE_URL + id)
+        video_url = data.at('param[@name="movie"]')['value']
+        hostel.video = video_url
+        #video_url = data.at('tag')
+      end
+    
+      if options[:directions] or options[:all]
+        data = parse_html(HW_SINGULAR_DETAIL_URL + id + "/directions/")
+    
+        #directions, geo
+        hostel.directions = data.at('div[@id="content"]').inner_text.gsub(/^[\d\D\n]*(DIRECTIONS)/,'')
+        hostel.geo = data.to_s.scan(/-{0,1}\d{1,3}\.\d{7}/).uniq!
+      end
+
+      if no_photos and (options[:images] or options[:all])
+        images = []
+        (1..no_photos).each do |i|
+          data = parse_html(HW_SINGULAR_IMAGE_URL + id + '&PicNO=' + i.to_s)
+          images << (data/"img").first[:src].to_s
+        end
+        hostel.images = images
+      end
+    else
+      hostel = nil
     end
     hostel # return
   end
@@ -147,9 +151,7 @@ class Hostelworld
       #the form name
       form = page.forms.first # => WWW::Mechanize::Form
       
-      Retryable.try 3 do
-        page = agent.submit(form)
-      end
+      page = agent.submit(form)
       
       #form must be submitted twice because the people writing hostelworld are retards
       form = page.forms.first # => WWW::Mechanize::Form
@@ -164,8 +166,14 @@ class Hostelworld
         page = agent.submit(form)
       end
       
-      data = page.search("//div[@id='content']")
+      error = page.search("div.microBookingError2")
 
+      if error.to_s.length > 1
+        data = "Full"
+      else
+        data = page.search("//div[@id='content']")
+      end
+      
       return data
     end
     

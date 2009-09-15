@@ -8,9 +8,9 @@ class Hostelbookers
   @default_options = { :date => date=(Date.today+4).to_s, :no_days => "7", :live => true }
   
   def self.find_hostels_by_location(options) #location
-    
-    city = options[:location].split(',').first.gsub(' ','')
-    country = options[:location].split(',').last.gsub(' ','')
+    city = options[:location].split(',').first.rstrip.lstrip.gsub(' ','-').squeeze("-")
+    country = options[:location].split(',').last.rstrip.lstrip.gsub(' ','-').squeeze("-")
+
     url = HB_PLURAL_HOSTELS_URL + "#{country}/#{city}"
     
     if options[:date]

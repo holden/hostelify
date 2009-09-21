@@ -51,7 +51,8 @@ class Hostelworld
       end
     
       #optional
-      no_photos = data.at('span/a[@id="picLink"]').inner_text.to_i
+      no_photos = data.at('div[@id="microPicScroll"]/span/a').inner_text.to_i
+      #no_photos = data.at('span/a[@id="picLink"]').inner_text.to_i
       video = data.at('div[@id="microVideo"]')
     
       facilities = []

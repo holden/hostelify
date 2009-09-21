@@ -149,12 +149,14 @@ class Hostelworld
       page = agent.get(url)
 
       #the form name
-      form = page.forms.first # => WWW::Mechanize::Form
+      #form = page.forms.first # => WWW::Mechanize::Form
+      form = page.form_with(:name => 'theForm')
       
       page = agent.submit(form)
       
       #form must be submitted twice because the people writing hostelworld are retards
-      form = page.forms.first # => WWW::Mechanize::Form
+      #form = page.forms.first # => WWW::Mechanize::Form
+      form = page.form_with(:name => 'theForm')
       form.field_with(:name => 'selMonth').options[month-1].select
       form.field_with(:name => 'selDay').options[day-1].select
       form.field_with(:name => 'selYear').options[year].select

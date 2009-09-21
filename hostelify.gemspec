@@ -2,11 +2,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{hostelify}
-  s.version = "0.3.0"
+  s.version = "0.3.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 1.2") if s.respond_to? :required_rubygems_version=
   s.authors = ["Holden Thomas"]
-  s.date = %q{2009-09-15}
+  s.date = %q{2009-09-21}
   s.description = %q{Simple Hostel Webscrapper.}
   s.email = %q{holden.thomas@gmail.com}
   s.extra_rdoc_files = ["README.rdoc", "lib/hostelify.rb", "lib/hostelify/gomio.rb", "lib/hostelify/hostelbookers.rb", "lib/hostelify/hostelify.rb", "lib/hostelify/hostelworld.rb"]

@@ -106,7 +106,7 @@ class Hostelworld
     if options[:date]
       options = @default_options.merge(options)
       date = Date.strptime(options[:date])
-      data = setSearch(url, options[:date], options[:no_ppl], options[:no_days])
+      data = setSearch2(url, options[:date], options[:no_ppl], options[:no_days])
     else
       data = parse_html(url)
     end
@@ -153,20 +153,24 @@ class Hostelworld
       #form = page.forms.first # => WWW::Mechanize::Form
       form = page.form_with(:name => 'theForm')
       
-      page = agent.submit(form)
+      #page = agent.submit(form)
       
       #form must be submitted twice because the people writing hostelworld are retards
       #form = page.forms.first # => WWW::Mechanize::Form
-      form = page.form_with(:name => 'theForm')
-      form.field_with(:name => 'selMonth').options[month-1].select
-      form.field_with(:name => 'selDay').options[day-1].select
-      form.field_with(:name => 'selYear').options[year].select
-      form.field_with(:name => 'NumNights').options[no_days.to_i-1].select
-      form.field_with(:name => 'Persons').options[no_ppl.to_i-1].select
-      form.field_with(:name => 'Currency').options[4].select #US Currency
+      #form = page.form_with(:name => 'theForm')
+      form.field_with(:name => 'selMonth2').options[month-1].select
+      form.field_with(:name => 'selDay2').options[day-1].select
+      form.field_with(:name => 'selYear2').options[year].select
+      #form.field_with(:name => { 0 => 'NumNights' }).options[no_days.to_i-1].select
+      my_fields = form.fields.select {|f| f.name == "NumNights"}
+      my_fields[1].value = no_days.to_i
+      #form.my_fields[1].whatever = "value"
+      #form.field_with(:name => 'Persons').options[no_ppl.to_i-1].select
+      #form.field_with(:name => 'Currency').options[4].select #US Currency
+      
 
       Retryable.try 3 do
-        page = agent.submit(form)
+        page = agent.submit(form, form.button_with(:name => 'DateSelect'))
       end
       
       error = page.search("div.microBookingError2")
@@ -180,10 +184,41 @@ class Hostelworld
       return data
     end
     
+    def self.setSearch2(url,date,no_ppl,no_days)
+
+        date = Date.strptime(date)
+        month = date.strftime("%m").to_i
+        day = date.strftime("%d").to_i
+        if Time.now.strftime("%y") == date.strftime("%y") then year = 0 else year = 1 end
+
+        agent = WWW::Mechanize.new
+        page = agent.get(url)
+
+        #the form name
+        #form = page.forms.first # => WWW::Mechanize::Form
+        form = page.form_with(:name => 'theForm')
+
+        #page = agent.submit(form)
+
+        #form must be submitted twice because the people writing hostelworld are retards
+
+        form.field_with(:name => 'selMonth').options[month-1].select
+        form.field_with(:name => 'selDay').options[day-1].select
+        form.field_with(:name => 'selYear').options[year].select
+        form.field_with(:name => 'NumNights').options[no_days.to_i-1].select
+
+        Retryable.try 3 do
+          page = agent.submit(form)
+        end
+        data = page.search("//div[@id='content']")
+        return data
+      end
+    
     def self.parse_availables(info)
       
       availability = info.at('table[@id="tableDatesSelected2"]')
       availability.search("div").remove
+      availability.search("span.hwRoomTypeDesc").remove
       
       availables = []
       

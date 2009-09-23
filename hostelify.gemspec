@@ -2,15 +2,15 @@
 
 Gem::Specification.new do |s|
   s.name = %q{hostelify}
-  s.version = "0.3.4"
+  s.version = "0.3.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 1.2") if s.respond_to? :required_rubygems_version=
   s.authors = ["Holden Thomas"]
-  s.date = %q{2009-09-21}
+  s.date = %q{2009-09-23}
   s.description = %q{Simple Hostel Webscrapper.}
   s.email = %q{holden.thomas@gmail.com}
   s.extra_rdoc_files = ["README.rdoc", "lib/hostelify.rb", "lib/hostelify/gomio.rb", "lib/hostelify/hostelbookers.rb", "lib/hostelify/hostelify.rb", "lib/hostelify/hostelworld.rb"]
-  s.files = ["Manifest", "README.rdoc", "Rakefile", "hostelify.gemspec", "lib/hostelify.rb", "lib/hostelify/gomio.rb", "lib/hostelify/hostelbookers.rb", "lib/hostelify/hostelify.rb", "lib/hostelify/hostelworld.rb", "spec/_helper.rb", "spec/hb_find_by_hostel.spec", "spec/hb_find_hostels.spec", "spec/hw_find_by_hostel.spec", "spec/hw_find_hostels.spec"]
+  s.files = ["Manifest", "README.rdoc", "Rakefile", "hostelify.gemspec", "lib/hostelify.rb", "lib/hostelify/gomio.rb", "lib/hostelify/hostelbookers.rb", "lib/hostelify/hostelify.rb", "lib/hostelify/hostelworld.rb", "pkg/hostelify-0.3.4.gem", "pkg/hostelify-0.3.4.tar.gz", "pkg/hostelify-0.3.4/Manifest", "pkg/hostelify-0.3.4/README.rdoc", "pkg/hostelify-0.3.4/Rakefile", "pkg/hostelify-0.3.4/hostelify.gemspec", "pkg/hostelify-0.3.4/lib/hostelify.rb", "pkg/hostelify-0.3.4/lib/hostelify/gomio.rb", "pkg/hostelify-0.3.4/lib/hostelify/hostelbookers.rb", "pkg/hostelify-0.3.4/lib/hostelify/hostelify.rb", "pkg/hostelify-0.3.4/lib/hostelify/hostelworld.rb", "pkg/hostelify-0.3.4/spec/_helper.rb", "pkg/hostelify-0.3.4/spec/hb_find_by_hostel.spec", "pkg/hostelify-0.3.4/spec/hb_find_hostels.spec", "pkg/hostelify-0.3.4/spec/hw_find_by_hostel.spec", "pkg/hostelify-0.3.4/spec/hw_find_hostels.spec", "spec/_helper.rb", "spec/hb_find_by_hostel.spec", "spec/hb_find_hostels.spec", "spec/hw_find_by_hostel.spec", "spec/hw_find_hostels.spec"]
   s.has_rdoc = true
   s.homepage = %q{http://github.com/holden/hostelify}
   s.rdoc_options = ["--line-numbers", "--inline-source", "--title", "Hostelify", "--main", "README.rdoc"]

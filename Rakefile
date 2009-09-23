@@ -2,7 +2,7 @@ require 'rubygems'
 require 'rake'
 require 'echoe'
  
-Echoe.new('hostelify', '0.3.5') do |p|
+Echoe.new('hostelify', '0.3.6') do |p|
   p.description = "Simple Hostel Webscrapper."
   p.url = "http://github.com/holden/hostelify"
   p.author = "Holden Thomas"

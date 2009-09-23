@@ -61,7 +61,8 @@ end
 
 describe "with dates to get availabilty and verify output!" do
   before(:all) do
-    @h = Hostelworld.find_hostel_by_id(:id => 20763, :date => (Date.today+20).to_s)
+    #@h = Hostelworld.find_hostel_by_id(:id => 20763, :date => (Date.today+20).to_s)
+    @h = Hostelworld.find_hostel_by_id(:id => 7113, :date => (Date.today+20).to_s)
   end
   
   it "get first availability and check it merit" do
@@ -69,11 +70,11 @@ describe "with dates to get availabilty and verify output!" do
   end
   
   it "check number of avail beds" do
-    @h.availability.first.spots.to_i.should be >= 1
+    @h.availability.last.spots.to_i.should be >= 1
   end
   
   it "last avail has a price > 5 US" do
-    @h.availability.first.price.to_i.should be > 5
+    @h.availability.last.price.to_i.should be > 5
   end
   
   it "book date eq today + 10" do

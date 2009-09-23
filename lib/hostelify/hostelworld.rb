@@ -206,6 +206,8 @@ class Hostelworld
         form.field_with(:name => 'selDay').options[day-1].select
         form.field_with(:name => 'selYear').options[year].select
         form.field_with(:name => 'NumNights').options[no_days.to_i-1].select
+        form.field_with(:name => 'Persons').options[no_ppl.to_i-1].select
+        form.field_with(:name => 'Currency').options[4].select #US Currency
 
         Retryable.try 3 do
           page = agent.submit(form)

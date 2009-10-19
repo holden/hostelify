@@ -55,9 +55,21 @@ class Hostelworld
       #no_photos = data.at('span/a[@id="picLink"]').inner_text.to_i
       video = data.at('div[@id="microVideo"]')
     
+      #facilities = []
+      #(data/"li.microFacilitiesBoomLi").each do |item|
+      #  facilities << item.inner_text
+      #end
+      
       facilities = []
-      (data/"li.microFacilitiesBoomLi").each do |item|
-        facilities << item.inner_text
+      index_count = 1
+      (data/"ul.microFacilitiesBoomUl/li").each_with_index do |item,index|
+        if item.attributes['class'] == "microFacilitiesBoomLiInner"
+          facilities << "#{facilities[index-index_count]}: " + item.inner_text
+          index_count += 1
+        else
+          index_count = 1
+          facilities << item.inner_text
+        end
       end
     
       ratings = []

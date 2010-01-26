@@ -1,6 +1,8 @@
+#delete
+
 class Hostelify
   attr_accessor :hostel_id, :name, :address, :description, :facilities, :ratings, :directions, :geo, :images, :video, :availability
-  attr_accessor :rating, :dorm, :single, :unavailable
+  attr_accessor :rating, :dorm, :single, :unavailable, :genre
 
   def initialize(options = {})
       options.each {

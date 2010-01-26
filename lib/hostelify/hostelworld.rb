@@ -132,7 +132,7 @@ class Hostelworld
       url = row.at("h2/a")['href']
       rating = row.at("h4/text()")
       rating = rating.to_s.to_i unless rating.nil?
-      type = row.at("div.hostelListingImage/span").inner_text
+      genre = row.at("div.hostelListingImage/span").inner_text
       hostel_id = url.match(/[\d]*$/).to_s
       
       if options[:date]
@@ -143,7 +143,7 @@ class Hostelworld
         available = available.to_a.join(',').split(',')
         @results << Hostelify.new(:hostel_id => hostel_id, :name => name, :description => desc, :rating => rating, :dorm => dorm, :single => single, :unavailable => available)
       else
-        @results << Hostelify.new(:hostel_id => hostel_id, :name => name, :description => desc, :rating => rating)
+        @results << Hostelify.new(:hostel_id => hostel_id, :name => name, :description => desc, :rating => rating, :genre => genre)
       end
     end
     return @results

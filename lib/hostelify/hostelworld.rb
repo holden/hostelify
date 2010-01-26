@@ -127,9 +127,9 @@ class Hostelworld
     @results = HostelifyCollection.new
 
     (data/"div.hostelListing").each do |row|
-      name = row.at("h3").inner_text
+      name = row.at("h2").inner_text
       desc = row.at("div.hostelEntry/p").inner_text.to_s.chop.gsub('more info','').squeeze('.')
-      url = row.at("h3/a")['href']
+      url = row.at("h2/a")['href']
       rating = row.at("h4/text()")
       rating = rating.to_s.to_i unless rating.nil?
       type = row.at("div.hostelListingImage/span").inner_text

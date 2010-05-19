@@ -1,3 +1,5 @@
+#gave up, gomio sucks
+
 require 'rubygems'
 require 'mechanize'
 require 'hpricot'

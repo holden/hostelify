@@ -3,6 +3,8 @@ class Hostelbookers
   #constants
   HB_SINGULAR_DETAIL_URL = "http://www.hostelbookers.com/hostels/" #poland/krakow/
   HB_PLURAL_HOSTELS_URL = "http://www.hostelbookers.com/hostels/" #poland/wroclaw/
+  HB_DYNAMIC_URL = "http://www.hostelbookers.com/property/index.cfm?fuseaction=accommodation.search&straccommodationtype=hostels"
+  #&intnights=2&intpeople=1&dtearrival=21/05/2010&fromPropertyNameSearch=0&intpropertyid=6281
   
   #options
   @default_options = { :date => date=(Date.today+4).to_s, :no_days => "7", :live => true }
@@ -12,6 +14,7 @@ class Hostelbookers
     country = options[:location].split(',').last.rstrip.lstrip.gsub(' ','-').squeeze("-")
 
     url = HB_PLURAL_HOSTELS_URL + "#{country}/#{city}"
+
     
     if options[:date]
       options = @default_options.merge(options)
@@ -44,21 +47,32 @@ class Hostelbookers
   end
   
   def self.find_hostel_by_id(options)
-    city = options[:location].split(',').first.gsub(' ','')
-    country = options[:location].split(',').last.gsub(' ','')
+    #city = options[:location].split(',').first.gsub(' ','')
+    #country = options[:location].split(',').last.gsub(' ','')
     id = options[:id]
-    url = HB_SINGULAR_DETAIL_URL + "#{country}/#{city}/#{id}"
+
+    #url = HB_SINGULAR_DETAIL_URL + "#{country}/#{city}/#{id}"
+    url = HB_DYNAMIC_URL + "&intnights=#{options[:no_days]}&fromPropertyNameSearch=0&intpropertyid=#{options[:id]}"
     
     hostel = Hostelify.new
 
     if options[:date]
       options = @default_options.merge(options)
-      data = setSearch_id(url,options[:date],options[:no_days])
     else
-      Retryable.try 3 do
-        data = Hpricot(open(url))
-      end
+      options[:date] = (Date.today+4).to_s
     end
+    
+    date = Date.strptime(options[:date])
+    url2 = HB_DYNAMIC_URL + "&intnights=#{options[:no_days]}&intpeople=1&dtearrival=#{date.strftime('%d/%m/%Y')}&fromPropertyNameSearch=0&intpropertyid=6281"
+    data = Hpricot(open(url2))
+    #data = setSearch_id(url,options[:date],options[:no_days])
+    #url2 = HB_DYNAMIC_URL + "&intnights=#{options[:no_days]}&dtearrival=21/05/2010&fromPropertyNameSearch=0&intpropertyid=#{options[:id]}"
+
+#    else
+#      Retryable.try 3 do
+#        data = Hpricot(open(url))
+#      end
+#    end
     
     hostel.hostel_id = id
     hostel.name = data.at("h1").inner_text

@@ -2,15 +2,10 @@ Manifest
 README.rdoc
 Rakefile
 hostelify.gemspec
-lib/hostel.rb
-lib/hostel/gomio.rb
-lib/hostel/hostel.rb
-lib/hostel/hostel_available.rb
-lib/hostel/hostelbookers.rb
-lib/hostel/hostelworld.rb
 lib/hostelify.rb
 lib/hostelify/gomio.rb
 lib/hostelify/hostel.rb
+lib/hostelify/hostelbookers-old.rb
 lib/hostelify/hostelbookers.rb
 lib/hostelify/hostelify.rb
 lib/hostelify/hostelworld.rb

@@ -95,10 +95,10 @@ class Hostelbookers
     if available
       (available/"tr").each do |row|
         name = row.at("td.roomType/label/text()")
-        people1 = row.at("td.people/select")
-        people = people1.at("option:last-child").inner_text unless people.nil?
-        price1 = row.at("td.price")
-        price = price1.inner_text.to_s.match(/[\d.]{1,5}/)[0] unless price.nil?
+        people = row.at("td.people/select")
+        people = people.at("option:last-child").inner_text unless people.nil?
+        price = row.at("td.price")
+        price = price.inner_text.to_s.match(/[\d.]{1,5}/)[0] unless price.nil?
         (0..(options[:no_days].to_i-1)).each do |x|
           @availables << HostelifyAvailable.new(name,price,people,(date+x).to_s) unless price.nil?
         end

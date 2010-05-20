@@ -35,7 +35,7 @@ end
 
 describe "all options" do
   before(:all) do
-    @h = Hostelbookers.find_hostel_by_id(:location => "krakow,poland", :id => 9330, :all => true)
+    @h = Hostelbookers.find_hostel_by_id(:id => 9330, :all => true)
   end
   
   it "directions should have a certain length <" do
@@ -49,7 +49,7 @@ end
 
 describe "with dates to get availabilty and verify output!" do
   before(:all) do
-    @h = Hostelbookers.find_hostel_by_id(:location => "krakow,poland", :id => 19831, :date => (Date.today+10).to_s)
+    @h = Hostelbookers.find_hostel_by_id(:id => 19831, :date => (Date.today+10).to_s)
   end
   
   it "get first availability and check it merit" do
@@ -57,7 +57,7 @@ describe "with dates to get availabilty and verify output!" do
   end
   
   it "check number of avail beds" do
-    @h.availability.first.spots.to_i.should be > 1
+    @h.availability.first.spots.to_i.should be >= 1
   end
   
   it "last avail has a price > 5 US" do

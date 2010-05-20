@@ -39,14 +39,13 @@ class Hostelbookers
   def self.find_hostel_by_id(options)
     options = @default_options.merge(options)
     date = Date.strptime(options[:date])
-    id = options[:id]
     hostel = Hostelify.new
     
     url = HB_SINGULAR_URL + "&intnights=#{options[:no_days]}&intpeople=1&dtearrival=#{date.strftime('%d/%m/%Y')}&intpropertyid=#{options[:id]}"
   
     data = Hpricot(open(url))
     
-    hostel.hostel_id = id
+    hostel.hostel_id = options[:id]
     hostel.name = data.at("h1").inner_text
     hostel.address = data.at("p.address").inner_text
     hostel.description = data.at('div[@id="overviewPane"]').inner_text
@@ -96,12 +95,11 @@ class Hostelbookers
     if available
       (available/"tr").each do |row|
         name = row.at("td.roomType/label/text()")
-        people = row.at("td.people/select")
-        people = people.at("option:last-child").inner_text unless people.nil?
-        price = row.at("td.price")
-        price = price.inner_text.to_s.match(/[\d.]{1,5}/)[0] unless price.nil?
+        people1 = row.at("td.people/select")
+        people = people1.at("option:last-child").inner_text unless people.nil?
+        price1 = row.at("td.price")
+        price = price1.inner_text.to_s.match(/[\d.]{1,5}/)[0] unless price.nil?
         (0..(options[:no_days].to_i-1)).each do |x|
-          #@availables << { :name => name, :spots => people, :price => price, :bookdate => (date+x).to_s } unless price.nil?
           @availables << HostelifyAvailable.new(name,price,people,(date+x).to_s) unless price.nil?
         end
       end

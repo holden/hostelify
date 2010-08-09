@@ -6,6 +6,6 @@
 * Hostelbookers
 * Gomio (removed too slow to speak of)
 
-Hostelworld real API is commercial and it sucks to high heaven... it was written as an afterthought by a Rent-a-coder.
+Hostelworld's real API is commercial and it sucks to high heaven... it was written as an afterthought by a Rent-a-coder.
 Hostelbookers' is also commercial only, but is quite ok.
 

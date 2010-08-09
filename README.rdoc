@@ -1,4 +1,6 @@
-h1. This a gem which creates an API for booking and pricing data for the following sites:
+# Hostelify 
+
+>This a gem which creates an API for booking and pricing data for the following sites:
 
 * Hostelworld
 * Hostelbookers

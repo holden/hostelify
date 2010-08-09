@@ -64,10 +64,13 @@ class Hostelbookers
     facilities = facilities + extras
     
     ratings = []
-    ratings_td = data.at('div[@id="overviewIndRtng"]/table')
+    ratings_td = data.at('div[@id="overviewIndRtng"]')
     
-    (ratings_td/"tr").each do |row|
-      ratings << row.at("td").inner_text.to_s.to_f
+    
+    (ratings_td/"dd").each do |row|
+      #ratings << row.at("td").inner_text.to_s.to_f
+      ratings << row.at('div[@class="ratingPercentage"]').inner_text.to_s.to_f
+      #puts row.at('div[@class="ratingPercentage"]')
     end
     
     hostel.ratings = ratings
@@ -84,9 +87,9 @@ class Hostelbookers
     hostel.images = images
     
     if options[:all]
-      data = Hpricot(open(url + "/map"))
+      data = Hpricot(open(url + "&strTab=map"))
       data.search("h2").remove #get rid of header
-      hostel.directions = data.at('div[@id="directions"]').inner_text
+      hostel.directions = data.at('div[@id="gpsMap"]').inner_text
       hostel.geo = data.to_s.scan(/-{0,1}\d{1,3}\.\d{7}/).uniq!
     end
     

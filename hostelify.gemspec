@@ -2,15 +2,15 @@
 
 Gem::Specification.new do |s|
   s.name = %q{hostelify}
-  s.version = "0.4.6"
+  s.version = "0.5.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 1.2") if s.respond_to? :required_rubygems_version=
   s.authors = ["Holden Thomas"]
-  s.date = %q{2010-05-20}
+  s.date = %q{2010-08-09}
   s.description = %q{Simple Hostel Webscrapper.}
   s.email = %q{holden.thomas@gmail.com}
-  s.extra_rdoc_files = ["README.rdoc", "lib/hostelify.rb", "lib/hostelify/gomio.rb", "lib/hostelify/hostel.rb", "lib/hostelify/hostelbookers-old.rb", "lib/hostelify/hostelbookers.rb", "lib/hostelify/hostelify.rb", "lib/hostelify/hostelworld.rb", "lib/hostelify/hostelworldmonkey.rb", "lib/items.rb", "lib/test.rb"]
-  s.files = ["Manifest", "README.rdoc", "Rakefile", "hostelify.gemspec", "lib/hostelify.rb", "lib/hostelify/gomio.rb", "lib/hostelify/hostel.rb", "lib/hostelify/hostelbookers-old.rb", "lib/hostelify/hostelbookers.rb", "lib/hostelify/hostelify.rb", "lib/hostelify/hostelworld.rb", "lib/hostelify/hostelworldmonkey.rb", "lib/items.rb", "lib/test.rb", "spec/_helper.rb", "spec/hb_find_by_hostel.spec", "spec/hb_find_hostels.spec", "spec/helper.rb", "spec/hw_find_by_hostel.spec", "spec/hw_find_hostels.spec"]
+  s.extra_rdoc_files = ["README.rdoc", "lib/hostelify.rb", "lib/hostelify/gomio.rb", "lib/hostelify/hostel.rb", "lib/hostelify/hostelbookers.rb", "lib/hostelify/hostelify.rb", "lib/hostelify/hostelworld.rb", "lib/items.rb"]
+  s.files = ["Manifest", "README.rdoc", "Rakefile", "lib/hostelify.rb", "lib/hostelify/gomio.rb", "lib/hostelify/hostel.rb", "lib/hostelify/hostelbookers.rb", "lib/hostelify/hostelify.rb", "lib/hostelify/hostelworld.rb", "lib/items.rb", "spec/_helper.rb", "spec/hb_find_by_hostel.spec", "spec/hb_find_hostels.spec", "spec/helper.rb", "spec/hw_find_by_hostel.spec", "spec/hw_find_hostels.spec", "hostelify.gemspec"]
   s.homepage = %q{http://github.com/holden/hostelify}
   s.rdoc_options = ["--line-numbers", "--inline-source", "--title", "Hostelify", "--main", "README.rdoc"]
   s.require_paths = ["lib"]

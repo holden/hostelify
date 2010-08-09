@@ -3,8 +3,9 @@ require 'spec/_helper'
 describe "should find individual hostel and get object with name etc." do
   
   before(:all) do
-    @h = Hostelbookers.find_hostel_by_id(:location => "krakow,poland", :id => 9330)
-    @h = Hostelbookers.find_hostel_by_id(:location => "lviv,ukraine", :id => 19606)
+    #@h = Hostelbookers.find_hostel_by_id(:location => "krakow,poland", :id => 9330)
+    #@h = Hostelbookers.find_hostel_by_id(:location => "lviv,ukraine", :id => 19606)
+    @h = Hostelbookers.find_hostel_by_id(:id => 19606)
   end
   
   it "should query hostelbookers and return the correct name" do

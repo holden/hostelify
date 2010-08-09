@@ -2,11 +2,11 @@ class Hostelworld
     
   #constants
   #location list includes/indexjs.js
-  HW_SINGULAR_DETAIL_URL = "http://www.hostelworld.com/hosteldetails.php?HostelNumber="
-  HW_SINGULAR_IMAGE_URL = "http://www.hostelworld.com/hostelpictures.php?HostelNumber="
-  HW_SINGULAR_AVAILABILITY = "http://www.hostelworld.com/availability.php/"
-  HW_SINGULAR_YOUTUBE_URL = "http://www.hostelworld.com/youtubevideo.php?HostelNumber="
-  HW_PLURAL_HOSTELS_URL = "http://www.hostelworld.com/findabed.php/"
+  HW_SINGULAR_DETAIL_URL = "http://www2.hostelworld.com/hosteldetails.php?HostelNumber="
+  HW_SINGULAR_IMAGE_URL = "http://www2.hostelworld.com/hostelpictures.php?HostelNumber="
+  HW_SINGULAR_AVAILABILITY = "http://www2.hostelworld.com/availability.php/"
+  HW_SINGULAR_YOUTUBE_URL = "http://www2.hostelworld.com/youtubevideo.php?HostelNumber="
+  HW_PLURAL_HOSTELS_URL = "http://www2.hostelworld.com/findabed.php/"
   
   #options
   @default_options = { :date => date=(Date.today+4).to_s, :no_days => "7", :no_ppl => "2" }
@@ -158,7 +158,7 @@ class Hostelworld
       day = date.strftime("%d").to_i
       if Time.now.strftime("%y") == date.strftime("%y") then year = 0 else year = 1 end
 
-      agent = WWW::Mechanize.new
+      agent = Mechanize.new
       page = agent.get(url)
 
       #the form name
@@ -178,7 +178,7 @@ class Hostelworld
       my_fields[1].value = no_days.to_i
       #form.my_fields[1].whatever = "value"
       #form.field_with(:name => 'Persons').options[no_ppl.to_i-1].select
-      #form.field_with(:name => 'Currency').options[4].select #US Currency
+      form.field_with(:name => 'Currency').options[4].select #US Currency
       
 
       Retryable.try 3 do

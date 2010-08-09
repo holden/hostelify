@@ -35,9 +35,9 @@ describe "youtube" do
     @h3 = Hostelworld.find_hostel_by_id(:id => 7113)
   end
   
-  it "video" do
-	  @h3.video.should match(/^.*(youtube.com).*$/)
-	end
+  #it "video" do
+	#  @h3.video.should match(/^.*(youtube.com).*$/)
+	#end
 end
 
 describe "find hostel with all options" do

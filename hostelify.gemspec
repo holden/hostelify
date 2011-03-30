@@ -1,30 +1,25 @@
 # -*- encoding: utf-8 -*-
+$:.push File.expand_path("../lib", __FILE__)
+require "hostelify/version"
 
 Gem::Specification.new do |s|
-  s.name = %q{hostelify}
-  s.version = "0.5.2"
+  s.name        = "hostelify"
+  s.version     = Hostelify::VERSION
+  s.platform    = Gem::Platform::RUBY
+  s.authors     = ["Holden Thomas"]
+  s.email       = ["holden@wombie.com"]
+  s.homepage    = "wombie.com"
+  s.summary     = %q{API for hostel related sites}
+  s.description = %q{scrapper for publicly accessible data from hostelworld hostelbookers etc.}
+  
+  s.add_dependency('rest-client', '>= 1.6.1')
+  s.add_dependency('nibbler', '>= 1.2.1')
+  s.add_development_dependency "rspec"
 
-  s.required_rubygems_version = Gem::Requirement.new(">= 1.2") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Holden Thomas"]
-  s.date = %q{2010-08-09}
-  s.description = %q{Simple Hostel Webscrapper.}
-  s.email = %q{holden.thomas@gmail.com}
-  s.extra_rdoc_files = ["README.rdoc", "lib/hostelify.rb", "lib/hostelify/gomio.rb", "lib/hostelify/hostel.rb", "lib/hostelify/hostelbookers.rb", "lib/hostelify/hostelify.rb", "lib/hostelify/hostelworld.rb", "lib/items.rb"]
-  s.files = ["Manifest", "README.rdoc", "Rakefile", "lib/hostelify.rb", "lib/hostelify/gomio.rb", "lib/hostelify/hostel.rb", "lib/hostelify/hostelbookers.rb", "lib/hostelify/hostelify.rb", "lib/hostelify/hostelworld.rb", "lib/items.rb", "spec/_helper.rb", "spec/hb_find_by_hostel.spec", "spec/hb_find_hostels.spec", "spec/helper.rb", "spec/hw_find_by_hostel.spec", "spec/hw_find_hostels.spec", "hostelify.gemspec"]
-  s.homepage = %q{http://github.com/holden/hostelify}
-  s.rdoc_options = ["--line-numbers", "--inline-source", "--title", "Hostelify", "--main", "README.rdoc"]
+  s.rubyforge_project = "hostelify"
+
+  s.files         = `git ls-files`.split("\n")
+  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
+  s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
-  s.rubyforge_project = %q{hostelify}
-  s.rubygems_version = %q{1.3.6}
-  s.summary = %q{Simple Hostel Webscrapper.}
-
-  if s.respond_to? :specification_version then
-    current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
-    s.specification_version = 3
-
-    if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
-    else
-    end
-  else
-  end
 end

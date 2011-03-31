@@ -7,16 +7,12 @@ class HostelWorld < Nibbler
   elements 'div.links ul.column li' => :features, :with => lambda { |node| node.inner_text.first }
   elements '.cboxElement img //@src' => :photos
   elements '.rating-values li' => :ratings
-  elements '.beds-details tr' => :rooms do
-    element 'td[1]' => :title, :with => lambda { |node| node.inner_text }
-    element 'td[2]' => :price
-  end
   
   elements '//table[@class="beds-details"]//tr[position() > 1]' => :beds do
     element 'td.left span' => :title, :with => lambda { |node| node.inner_text.lstrip.rstrip }
     elements 'td[@style="cursor: help"]' => :nights do
-      element '.currency' => :price
-      element '@title' => :spots, :with => lambda { |node| node.inner_text.match(/\d{1,}$/) }
+      element '.currency' => :price, :with => lambda { |node| node.inner_text.to_f }
+      element '@title' => :spots, :with => lambda { |node| node.inner_text.match(/\d{1,}$/).to_s.to_i }
     end
   end
 end

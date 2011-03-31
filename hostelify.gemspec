@@ -8,11 +8,12 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Holden Thomas"]
   s.email       = ["holden@wombie.com"]
-  s.homepage    = "wombie.com"
+  s.homepage    = "http://wombie.com"
   s.summary     = %q{API for hostel related sites}
   s.description = %q{scrapper for publicly accessible data from hostelworld hostelbookers etc.}
   
   s.add_dependency('rest-client', '>= 1.6.1')
+  s.add_dependency('nokogiri')
   s.add_dependency('nibbler', '>= 1.2.1')
   s.add_development_dependency "rspec"
 

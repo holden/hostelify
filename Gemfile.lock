@@ -3,6 +3,7 @@ PATH
   specs:
     hostelify (0.6.0)
       nibbler (>= 1.2.1)
+      nokogiri
       rest-client (>= 1.6.1)
 
 GEM
@@ -11,6 +12,7 @@ GEM
     diff-lcs (1.1.2)
     mime-types (1.16)
     nibbler (1.2.1)
+    nokogiri (1.4.4)
     rest-client (1.6.1)
       mime-types (>= 1.16)
     rspec (2.5.0)
@@ -28,5 +30,6 @@ PLATFORMS
 DEPENDENCIES
   hostelify!
   nibbler (>= 1.2.1)
+  nokogiri
   rest-client (>= 1.6.1)
   rspec

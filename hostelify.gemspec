@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.add_dependency('rest-client', '>= 1.6.1')
   s.add_dependency('nokogiri', '>= 1.4.4')
   s.add_dependency('nibbler', '>= 1.2.1')
-  s.add_development_dependency 'rspec', '2.5.0')
+  s.add_development_dependency('rspec', '2.5.0')
 
   s.rubyforge_project = "hostelify"
 

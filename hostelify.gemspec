@@ -13,9 +13,9 @@ Gem::Specification.new do |s|
   s.description = %q{scrapper for publicly accessible data from hostelworld hostelbookers etc.}
   
   s.add_dependency('rest-client', '>= 1.6.1')
-  s.add_dependency('nokogiri')
+  s.add_dependency('nokogiri', '>= 1.4.4')
   s.add_dependency('nibbler', '>= 1.2.1')
-  s.add_development_dependency "rspec"
+  s.add_development_dependency 'rspec', '2.5.0')
 
   s.rubyforge_project = "hostelify"
 

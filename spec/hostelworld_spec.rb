@@ -18,5 +18,13 @@ describe "hostelworld" do
   it "should have at least 4 images" do
 	  @hostel.should have_at_least(6).photos
 	end
+	
+	it "should have one available spot" do
+	  @hostel.beds.last.nights.last.spots.to_i.should be >= 1
+	end
+  
+  it "should have a price above $5" do
+    @hostel.beds.last.nights.last.price.to_i.should be >= 5
+  end
   
 end

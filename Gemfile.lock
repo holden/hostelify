@@ -1,9 +1,9 @@
 PATH
   remote: .
   specs:
-    hostelify (0.6.0)
+    hostelify (0.6.1)
       nibbler (>= 1.2.1)
-      nokogiri
+      nokogiri (>= 1.4.4)
       rest-client (>= 1.6.1)
 
 GEM
@@ -30,6 +30,6 @@ PLATFORMS
 DEPENDENCIES
   hostelify!
   nibbler (>= 1.2.1)
-  nokogiri
+  nokogiri (>= 1.4.4)
   rest-client (>= 1.6.1)
-  rspec
+  rspec (= 2.5.0)

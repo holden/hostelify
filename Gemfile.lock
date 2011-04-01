@@ -1,10 +1,11 @@
 PATH
   remote: .
   specs:
-    hostelify (0.6.1)
+    hostelify (0.6.2)
       nibbler (>= 1.2.1)
       nokogiri (>= 1.4.4)
       rest-client (>= 1.6.1)
+      robotstxt (>= 0.5.4)
 
 GEM
   remote: http://rubygems.org/
@@ -15,6 +16,7 @@ GEM
     nokogiri (1.4.4)
     rest-client (1.6.1)
       mime-types (>= 1.16)
+    robotstxt (0.5.4)
     rspec (2.5.0)
       rspec-core (~> 2.5.0)
       rspec-expectations (~> 2.5.0)
@@ -32,4 +34,5 @@ DEPENDENCIES
   nibbler (>= 1.2.1)
   nokogiri (>= 1.4.4)
   rest-client (>= 1.6.1)
+  robotstxt (>= 0.5.4)
   rspec (= 2.5.0)

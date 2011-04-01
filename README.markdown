@@ -15,3 +15,6 @@ If a site owner wishes to give instructions to web robots, including this one, h
 This text file should contain the instructions in a specific format (see examples below). 
 Robots that choose to follow the instructions try to fetch this file and read the instructions before fetching any other file from the web site. 
 If this file doesn’t exist web robots assume that the web owner wishes to provide no specific instructions.
+
+>User-agent: *
+>Disallow: /

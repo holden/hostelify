@@ -8,7 +8,7 @@
 
 Web scrapping utility for publicly accessible data such as dates and prices.
 
-Well-behaved bots Policy
+# Well-behaved bots Policy
 
 This gem strictly follows the Well-behaved bots Policy, the standard policy of Google, Yahoo & many other search engines.
 If a site owner wishes to give instructions to web robots, including this one, he/she must place a text file called robots.txt in the root of the web site hierarchy (e.g. www.example.com/robots.txt). 

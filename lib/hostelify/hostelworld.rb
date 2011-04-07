@@ -1,4 +1,4 @@
-class HostelWorld < Nibbler
+class Hostelworld < Nibbler
   element 'h1' => :name, :with => lambda { |node| node.inner_text.lstrip.rstrip }
   element '.street-city' => :address, :with => lambda { |node| node.inner_text.gsub(/\s{6,}.*/,'').chop.lstrip }
   element 'div.row //p[5]' => :content

@@ -31,7 +31,7 @@ module Hostelify
       end
     end
 
-    result = HostelWorld.parse @resource
+    result = Hostelworld.parse @resource
   end  
   
 end

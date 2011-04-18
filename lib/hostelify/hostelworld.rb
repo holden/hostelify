@@ -6,7 +6,7 @@ class Hostelworld < Nibbler
   elements '//script[14]' => :geo, :with => lambda { |node| node.inner_text.scan(/-{0,1}\d{1,3}\.\d{7}/).uniq! }
   elements 'div.links ul.column li' => :features, :with => lambda { |node| node.inner_text.first }
   elements '.cboxElement img //@src' => :photos
-  elements '.rating-values li' => :ratings
+  elements '.rating-values li' => :ratings, :with => lambda { |node| node.inner_text.to_i }
   element 'script[19]' => :base_currency, :with => lambda { |node| node.inner_text.scan(/\$\.Microsite\.propertyCurrency = \'(.*)\';/).to_s }
   
   elements '//table[@class="beds-details"]//tr[position() > 1]' => :beds do

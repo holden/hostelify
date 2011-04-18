@@ -7,6 +7,7 @@ class Hostelworld < Nibbler
   elements 'div.links ul.column li' => :features, :with => lambda { |node| node.inner_text.first }
   elements '.cboxElement img //@src' => :photos
   elements '.rating-values li' => :ratings
+  element 'script[19]' => :base_currency, :with => lambda { |node| node.inner_text.scan(/\$\.Microsite\.propertyCurrency = \'(.*)\';/).to_s }
   
   elements '//table[@class="beds-details"]//tr[position() > 1]' => :beds do
     element 'td.left span' => :title, :with => lambda { |node| node.inner_text.lstrip.rstrip.squeeze(" ") }

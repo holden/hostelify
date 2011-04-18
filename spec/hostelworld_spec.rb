@@ -27,4 +27,12 @@ describe "hostelworld" do
     @hostel.beds.last.nights.last.price.to_i.should be >= 5
   end
   
+  it "should return a base currency" do
+    @hostel.base_currency.should_not be_nil
+  end
+  
+  it "should return a base currency in EUROs" do
+    @hostel.base_currency.should be == "EUR"
+  end
+  
 end

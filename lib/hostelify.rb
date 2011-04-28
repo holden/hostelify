@@ -26,7 +26,8 @@ module Hostelify
         @resource = RestClient.post redirect, 
           :date_from => date+1, 
           :date_to => date+8,
-          :searchperformedflag => 1, 
+          :searchperformedflag => 1,
+          :dynamicSearchFlag => 1,
           :currency => options[:currency]
       end
     end

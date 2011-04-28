@@ -9,7 +9,10 @@ class Hostelworld < Nibbler
   elements '.rating-values li' => :ratings, :with => lambda { |node| node.inner_text.to_i }
   element 'script[19]' => :base_currency, :with => lambda { |node| node.inner_text.scan(/\$\.Microsite\.propertyCurrency = \'(.*)\';/).to_s }
   
-  elements 'table.roomtype tr td span[@style="display:none;"]' => :rooms, :with => lambda { |node| node.inner_text.lstrip.rstrip }
+  elements 'table.roomtype tr' => :rooms do
+    element 'td span[@style="display:none;"]' => :title, :with => lambda { |node| node.inner_text.lstrip.rstrip }
+  end
+  
   elements 'table.availability tr' => :beds do
     elements 'td' => :nights do
       element '.currency' => :price, :with => lambda { |node| node.inner_text.to_f }

@@ -13,7 +13,7 @@ class Hostelworld < Nibbler
     element 'td span[@style="display:none;"]' => :title, :with => lambda { |node| node.inner_text.lstrip.rstrip }
   end
   
-  elements 'table.availability tr' => :beds do
+  elements '//table[@class="availability"]//tr[position() > 1]' => :beds do
     elements 'td' => :nights do
       element '.currency' => :price, :with => lambda { |node| node.inner_text.to_f }
       element '@title' => :spots, :with => lambda { |node| node.inner_text.match(/\d{1,}$/).to_s.to_i }

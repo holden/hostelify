@@ -5,8 +5,8 @@ class Hostelworld < Nibbler
   element 'div#directions p' => :directions, :with => lambda { |node| node.inner_text.gsub(/(DIRECTIONS):.*$/,'').lstrip }
   elements '//script[14]' => :geo, :with => lambda { |node| node.inner_text.scan(/-{0,1}\d{1,3}\.\d{7}/).uniq! }
   elements 'div.links ul.column li' => :features, :with => lambda { |node| node.inner_text.first }
-  elements '.cboxElement img //@src' => :photos
-  elements '.rating-values li' => :ratings, :with => lambda { |node| node.inner_text.to_i }
+  elements '#gallery-imagelist li a //@href' => :photos
+  elements '.microratingpanel li span' => :ratings, :with => lambda { |node| node.inner_text.to_i }
   element 'script[19]' => :base_currency, :with => lambda { |node| node.inner_text.scan(/\$\.Microsite\.propertyCurrency = \'(.*)\';/).to_s }
   
   elements '//table[@class="roomtype"]//tr[position() > 1]' => :rooms do

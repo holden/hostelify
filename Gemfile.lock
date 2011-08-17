@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    hostelify (0.6.9)
+    hostelify (0.7.2)
       nibbler (>= 1.2.1)
       nokogiri (>= 1.4.4)
       rest-client (>= 1.6.1)
@@ -13,8 +13,8 @@ GEM
     diff-lcs (1.1.2)
     mime-types (1.16)
     nibbler (1.2.1)
-    nokogiri (1.4.4)
-    rest-client (1.6.1)
+    nokogiri (1.5.0)
+    rest-client (1.6.3)
       mime-types (>= 1.16)
     robotstxt (0.5.4)
     rspec (2.5.0)

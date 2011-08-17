@@ -22,17 +22,26 @@ module Hostelify
         redirect = response.headers[:location]
         redirect = redirect + '/directions' if options[:directions]
         date = Date.strptime(options[:date_from].to_s)
-      
-        @resource = RestClient.post redirect, 
+        options = {
           :date_from => date+1, 
           :date_to => date+8,
           :searchperformedflag => 1,
           :dynamicSearchFlag => 1,
+          :packNo => 0,
           :currency => options[:currency]
+        }
+      
+        RestClient.post redirect, options do |response, request, result|
+          @resource = RestClient.get "http://www.hostelworld.com#{response.headers[:location]}", {:cookies => response.cookies}
+        end
       end
+      
+      result = Hostelworld.parse @resource
     end
+    
 
-    result = Hostelworld.parse @resource
   end  
   
 end
+
+
